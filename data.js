@@ -58,14 +58,12 @@ const portfolioData = {
             },
             {
                 title: "Lab Report",
-                image: "img/project3.png",
                 description: "This repository includes a web-based disease and report management application for patients, doctors and laboratory staff",
                 technologies: ["Java", "Spring Boot", "Maven", "React.js", "Docker", "Typescript", "MySQL", "iText"],
                 githubUrl: "https://github.com/kerimsenturk5734/lab-report"
             },
             {
                 title: "Visual Data Structure",
-                image: "img/project3.png",
                 description: "This repository contains a web-based app to visualize and teach data structures and algorithms.",
                 technologies: ["Java", "Spring Boot", "Maven", "React.js", "Docker", "JavaScript", "MySQL", "D3.js"],
                 githubUrl: "https://github.com/kerimsenturk5734/visual-data-structure"
@@ -86,7 +84,6 @@ const portfolioData = {
             },
             {
                 title: "DevFolio",
-                image: "img/project3.png",
                 description: "A simple, clean portfolio site template for software developers to showcase their personal information, career information, blog content and projects.",
                 technologies: ["HTML", "CSS", "JavaScript", "Bootstrap"],
                 githubUrl: "https://github.com/kerimsenturk5734/dev-folio"
