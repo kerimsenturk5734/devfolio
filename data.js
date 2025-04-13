@@ -36,6 +36,12 @@ const portfolioData = {
                 company: "Ozgur Yazilim A.S.",
                 period: "April 2024-July 2024",
                 technologies: ["Java", "Spring Boot", "Maven", "React.js"]
+            },
+            {
+                position: "Backend Web Developer",
+                company: "INDATA Endüstriyel Veri Teknolojileri A.Ş.",
+                period: "February 2025-Present",
+                technologies: ["C#", "ASP.NET Core"]
             }
         ]
     },
