@@ -587,22 +587,25 @@ class ContactSection extends Section {
     }
 
     setupFormHandler() {
-        document.addEventListener('DOMContentLoaded', () => {
+        setTimeout(() => {
             const form = document.getElementById('contactForm');
             if (form) {
                 form.addEventListener('submit', (e) => {
                     e.preventDefault();
-                    
+    
                     const name = form.elements['name'].value;
                     const subject = form.elements['subject'].value;
                     const message = form.elements['message'].value;
-                    
+    
                     const mailtoLink = `mailto:${this.data.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(`From: ${name}\n\n${message}`)}`;
-                    
-                    window.open(mailtoLink, '_blank');
+    
+                    window.location.href = mailtoLink; // mailto'yu aç
                     form.reset();
                 });
+            } else {
+                console.warn('Form bulunamadı');
             }
-        });
+        }, 100); // 100ms ge
     }
+    
 } 
