@@ -14,16 +14,21 @@ class PortfolioApp {
         // Education ve Experience bölümleri için özel container
         const eduExpContainer = document.createElement('section');
         eduExpContainer.id = 'edu_exp';
-        eduExpContainer.className = 'container my-5 p-5';
+        eduExpContainer.className = 'py-5'
+
+        const eduExpWrapper = document.createElement('div');
+        eduExpWrapper.className = 'container';
+
         const eduExpRow = document.createElement('div');
-        eduExpRow.className = 'row gap-3 justify-content-center';
-        
+        eduExpRow.className = 'row justify-content-center gy-4';
+
         const educationSection = new EducationSection(this.data.education);
         const experienceSection = new ExperienceSection(this.data.experience);
         
         eduExpRow.appendChild(educationSection.render());
         eduExpRow.appendChild(experienceSection.render());
-        eduExpContainer.appendChild(eduExpRow);
+        eduExpWrapper.appendChild(eduExpRow);
+        eduExpContainer.appendChild(eduExpWrapper);
         
         this.sections.push({
             render: () => eduExpContainer

@@ -48,7 +48,7 @@ class HeroSection extends Section {
     render() {
         const section = document.createElement('section');
         section.id = this.data.id;
-        section.className = 'container';
+        section.className = 'container px-4';
 
         const row = document.createElement('div');
         row.className = 'row justify-content-center align-items-center gap-3 py-5';
@@ -88,16 +88,17 @@ class AboutSection extends Section {
     render() {
         const section = document.createElement('section');
         section.id = this.data.id;
-        section.className = 'container my-5 p-5';
+        section.className = ' py-5';
 
         const content = document.createElement('div');
-        const title = this.createTitle();
-        title.className += ' bg-warning text-black';
+        content.className = 'container col-md-10 px-4'
+        const title = document.createElement('h2');
+        title.className = 'text-center mb-4 py-2 bg-warning text-black';
+        title.textContent = this.data.title;
 
         const description = document.createElement('p');
-        description.className = 'fs-5 px-5';
+        description.className = 'fs-5 px-md-1';
         description.textContent = this.data.description;
-
         content.appendChild(title);
         content.appendChild(description);
         section.appendChild(content);
@@ -108,28 +109,27 @@ class AboutSection extends Section {
 
 class EducationSection extends Section {
     render() {
-        const section = document.createElement('section');
-        section.id = this.data.id;
-        section.className = 'col-md-5';
+        const div = document.createElement('div');
+        div.className = 'col-md-6 col-12';
 
         const title = document.createElement('h3');
         title.className = 'text-center mb-4 py-2 bg-primary text-white';
         title.textContent = this.data.title;
 
         const timeline = document.createElement('ul');
-        timeline.className = 'timeline';
+        timeline.className = 'timeline px-3';
 
         this.data.items.forEach(item => {
-            const li = this.createEducationItem(item);
             timeline.appendChild(document.createElement('hr'));
+            const li = this.createEducationItem(item);
             timeline.appendChild(li);
         });
         timeline.appendChild(document.createElement('hr'));
 
-        section.appendChild(title);
-        section.appendChild(timeline);
+        div.appendChild(title);
+        div.appendChild(timeline);
 
-        return section;
+        return div;
     }
 
     createEducationItem(item) {
@@ -150,28 +150,27 @@ class EducationSection extends Section {
 
 class ExperienceSection extends Section {
     render() {
-        const section = document.createElement('section');
-        section.id = this.data.id;
-        section.className = 'col-md-5';
+        const div = document.createElement('div');
+        div.className = 'col-md-6 col-12';
 
         const title = document.createElement('h3');
         title.className = 'text-center mb-4 py-2 bg-success text-white';
         title.textContent = this.data.title;
 
         const timeline = document.createElement('ul');
-        timeline.className = 'timeline';
+        timeline.className = 'timeline px-3';
 
         this.data.items.forEach(item => {
-            const li = this.createExperienceItem(item);
             timeline.appendChild(document.createElement('hr'));
+            const li = this.createExperienceItem(item);
             timeline.appendChild(li);
         });
         timeline.appendChild(document.createElement('hr'));
 
-        section.appendChild(title);
-        section.appendChild(timeline);
+        div.appendChild(title);
+        div.appendChild(timeline);
 
-        return section;
+        return div;
     }
 
     createExperienceItem(item) {
@@ -204,13 +203,14 @@ class ProjectsSection extends Section {
         section.className = 'py-5';
 
         const container = document.createElement('div');
-        container.className = 'container col-md-10';
+        container.className = 'container col-md-10 px-4';
 
-        const title = this.createTitle();
-        title.className += ' bg-maroon';
+        const title = document.createElement('h2');
+        title.className = 'text-center mb-4 bg-maroon py-2';
+        title.textContent = this.data.title;
 
         const row = document.createElement('div');
-        row.className = 'row g-4 px-3';
+        row.className = 'row g-4';
 
         this.data.items.forEach(project => {
             const projectCard = this.createProjectCard(project);
@@ -226,30 +226,62 @@ class ProjectsSection extends Section {
 
     createProjectCard(project) {
         const col = document.createElement('div');
-        col.className = 'col-md-3';
+        col.className = 'col-12 col-sm-6 col-lg-4 mb-4';
+        
+        const card = this.createCard('h-100 shadow-sm');
+        
+        // Resim container'ı
+        const imageContainer = this.createImageContainer(
+            project.image || `https://api.dicebear.com/7.x/shapes/svg?seed=${encodeURIComponent(project.title)}&backgroundColor=ffdfbf,ffd5dc,c0aede,b6e3f4`,
+            project.title
+        );
+        card.appendChild(imageContainer);
 
+        // Card body
+        const cardBody = document.createElement('div');
+        cardBody.className = 'card-body d-flex flex-column';
+
+        // Başlık
+        const title = document.createElement('h5');
+        title.className = 'card-title';
+        title.style.overflow = 'hidden';
+        title.style.textOverflow = 'ellipsis';
+        title.style.display = '-webkit-box';
+        title.style.lineClamp = '2';
+        title.style.boxOrient = 'vertical';
+        title.textContent = project.title;
+        cardBody.appendChild(title);
+
+        // Teknolojiler
+        const technologiesDiv = document.createElement('div');
+        technologiesDiv.className = 'technologies py-1';
         const technologies = project.technologies.map(tech => 
             `<span class="badge bg-orange black">${tech}</span>`
         ).join(' ');
+        technologiesDiv.innerHTML = technologies;
+        cardBody.appendChild(technologiesDiv);
 
-        col.innerHTML = `
-            <div class="card h-100">
-                <img src="${project.image}" class="card-img-top" alt="${project.title}">
-                <div class="card-body d-flex flex-column">
-                    <h5 class="card-title fw-bold">${project.title}</h5>
-                    <div class="technologies py-1">
-                        ${technologies}
-                    </div>
-                    <hr class="maroon">
-                    <p class="card-text multiline-truncate">
-                        ${project.description}
-                    </p>
-                    <a href="${project.githubUrl}" class="btn bg-maroon gray fw-bold mt-auto">
-                        <i class="fa-brands fa-github"></i> View on GitHub
-                    </a>
-                </div>
-            </div>
-        `;
+        // Açıklama
+        const description = document.createElement('p');
+        description.className = 'card-text multiline-truncate';
+        description.textContent = project.description;
+        cardBody.appendChild(description);
+
+        // GitHub butonu container
+        const buttonContainer = document.createElement('div');
+        buttonContainer.className = 'd-flex justify-content-center mt-auto w-100';
+
+        // GitHub butonu
+        const button = document.createElement('a');
+        button.href = project.githubUrl;
+        button.className = 'btn bg-maroon gray fw-bold w-100';
+        button.target = '_blank';
+        button.innerHTML = '<i class="fa-brands fa-github"></i> View on GitHub';
+        buttonContainer.appendChild(button);
+
+        cardBody.appendChild(buttonContainer);
+        card.appendChild(cardBody);
+        col.appendChild(card);
 
         return col;
     }
@@ -267,7 +299,7 @@ class BlogsSection extends Section {
         section.className = 'py-5';
 
         const container = document.createElement('div');
-        container.className = 'container col-md-10';
+        container.className = 'container col-md-10 px-4';
         const title = this.createTitle('bg-dark');
 
         // Loading spinner
@@ -357,14 +389,14 @@ class BlogsSection extends Section {
 
     createBlogCard(blog) {
         const col = document.createElement('div');
-        col.className = 'col-12 col-sm-6 col-lg-4';
+        col.className = 'col-12 col-sm-6 col-lg-4 mb-4';
         
         const link = document.createElement('a');
         link.href = blog.link;
         link.className = 'text-decoration-none';
         link.target = '_blank';
 
-        const card = this.createCard('h-100');
+        const card = this.createCard('h-100 shadow-sm');
         
         // Resim container'ı
         const imageContainer = this.createImageContainer(blog.thumbnailUrl, blog.title);
@@ -406,7 +438,7 @@ class ContactSection extends Section {
         section.className = 'mt-5 py-5';
 
         const container = document.createElement('div');
-        container.className = 'container';
+        container.className = 'container px-4';
         const title = this.createTitle('bg-warning text-black');
 
         const row = document.createElement('div');
@@ -435,7 +467,7 @@ class ContactSection extends Section {
 
     createContactInfo() {
         const col = document.createElement('div');
-        col.className = 'col-12 col-md-4 mt-5 mt-md-0 row align-items-center';
+        col.className = 'col-12 col-md-4 mt-5 mt-md-0 row align-items-center px-3';
 
         const infoDiv = document.createElement('div');
         infoDiv.className = 'text-center text-md-start';
@@ -482,7 +514,7 @@ class ContactSection extends Section {
 
     createContactForm() {
         const col = document.createElement('div');
-        col.className = 'col-12 col-md-6 p-4';
+        col.className = 'col-12 col-md-6 p-3 p-md-4';
 
         const form = document.createElement('form');
         form.id = 'contactForm';
