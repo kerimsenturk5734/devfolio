@@ -88,17 +88,17 @@ class AboutSection extends Section {
     render() {
         const section = document.createElement('section');
         section.id = this.data.id;
-        section.className = 'container my-5 p-3 p-md-5';
+        section.className = ' py-5';
 
         const content = document.createElement('div');
+        content.className = 'container col-md-10 px-4'
         const title = document.createElement('h2');
         title.className = 'text-center mb-4 py-2 bg-warning text-black';
         title.textContent = this.data.title;
 
         const description = document.createElement('p');
-        description.className = 'fs-5 px-3 px-md-5';
+        description.className = 'fs-5 px-md-1';
         description.textContent = this.data.description;
-
         content.appendChild(title);
         content.appendChild(description);
         section.appendChild(content);
@@ -107,32 +107,10 @@ class AboutSection extends Section {
     }
 }
 
-class EduExpSection extends Section {
-    render() {
-        const section = document.createElement('section');
-        section.id = this.data.id;
-        section.className = 'container my-5 p-3 p-md-5';
-
-        const row = document.createElement('div');
-        row.className = 'row gap-4 justify-content-center';
-
-        // Education Section
-        const educationSection = new EducationSection(this.data.education);
-        row.appendChild(educationSection.render());
-
-        // Experience Section
-        const experienceSection = new ExperienceSection(this.data.experience);
-        row.appendChild(experienceSection.render());
-
-        section.appendChild(row);
-        return section;
-    }
-}
-
 class EducationSection extends Section {
     render() {
         const div = document.createElement('div');
-        div.className = 'col-12 col-md-5 mb-4 mb-md-0';
+        div.className = 'col-md-6 col-12';
 
         const title = document.createElement('h3');
         title.className = 'text-center mb-4 py-2 bg-primary text-white';
@@ -173,7 +151,7 @@ class EducationSection extends Section {
 class ExperienceSection extends Section {
     render() {
         const div = document.createElement('div');
-        div.className = 'col-12 col-md-5';
+        div.className = 'col-md-6 col-12';
 
         const title = document.createElement('h3');
         title.className = 'text-center mb-4 py-2 bg-success text-white';
