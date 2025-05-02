@@ -175,9 +175,15 @@ class ExperienceSection extends Section {
 
     createExperienceItem(item) {
         const li = document.createElement('li');
-        const technologies = item.technologies.map(tech => 
-            `<span class="badge bg-orange black">${tech}</span>`
-        ).join(' ');
+        const technologies = item.technologies.map(key => {
+            const tech = techBadgeMap[key] || techBadgeMap['default'];
+            if (!tech) return '';
+            return `
+                <span class="badge ${tech.colorClass} d-inline-flex align-items-center gap-1">
+                    <i class="${tech.icon}"></i> ${tech.name === "Unknown" ? key : tech.name}
+                </span>
+            `;
+        }).join(' ');
 
         li.innerHTML = `
             <div class="timeline-step">
@@ -227,9 +233,9 @@ class ProjectsSection extends Section {
     createProjectCard(project) {
         const col = document.createElement('div');
         col.className = 'col-12 col-sm-6 col-lg-4 mb-4';
-        
+
         const card = this.createCard('h-100 shadow-sm');
-        
+
         // Resim container'ı
         const imageContainer = this.createImageContainer(
             project.image || `https://api.dicebear.com/7.x/shapes/svg?seed=${encodeURIComponent(project.title)}&backgroundColor=ffdfbf,ffd5dc,c0aede,b6e3f4`,
@@ -255,11 +261,18 @@ class ProjectsSection extends Section {
         // Teknolojiler
         const technologiesDiv = document.createElement('div');
         technologiesDiv.className = 'technologies py-1';
-        const technologies = project.technologies.map(tech => 
-            `<span class="badge bg-orange black">${tech}</span>`
-        ).join(' ');
-        technologiesDiv.innerHTML = technologies;
-        cardBody.appendChild(technologiesDiv);
+
+        project.technologies.forEach(key => {
+            const tech = techBadgeMap[key] || techBadgeMap['default'];
+            if (!tech) return; // bilinmeyen teknoloji varsa default bir ayar ile oluştur
+
+            const span = document.createElement("span");
+            span.className = `badge ${tech.colorClass} me-1`;
+            span.innerHTML = `<i class="${tech.icon} me-1"></i> ${tech.name === "Unknown" ? key : tech.name}`;
+            technologiesDiv.appendChild(span);
+        });
+
+        cardBody.appendChild(technologiesDiv)
 
         // Açıklama
         const description = document.createElement('p');
@@ -341,12 +354,12 @@ class BlogsSection extends Section {
         try {
             const response = await fetch(`https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(this.data.rssFeedUrl)}`);
             const data = await response.json();
-            
+
             if (data.status === 'ok') {
                 this.blogs = data.items.map(item => {
                     // İçerikten ilk resmi bul
                     let thumbnailUrl = 'img/blog-placeholder.png';
-                    
+
                     // Önce content içindeki ilk img etiketini ara
                     const imgMatch = item.content.match(/<img[^>]+src="([^">]+)"/);
                     if (imgMatch && imgMatch[1]) {
@@ -390,14 +403,14 @@ class BlogsSection extends Section {
     createBlogCard(blog) {
         const col = document.createElement('div');
         col.className = 'col-12 col-sm-6 col-lg-4 mb-4';
-        
+
         const link = document.createElement('a');
         link.href = blog.link;
         link.className = 'text-decoration-none';
         link.target = '_blank';
 
         const card = this.createCard('h-100 shadow-sm');
-        
+
         // Resim container'ı
         const imageContainer = this.createImageContainer(blog.thumbnailUrl, blog.title);
         card.appendChild(imageContainer);
@@ -487,11 +500,22 @@ class ContactSection extends Section {
         const socialDiv = document.createElement('div');
         socialDiv.className = 'mt-5 d-flex justify-content-center justify-content-md-start gap-4';
 
-        const socialLinks = [
-            { icon: 'fa-instagram', url: this.data.social.instagram },
-            { icon: 'fa-medium', url: this.data.social.medium },
-            { icon: 'fa-github', url: this.data.social.github },
-            { icon: 'fa-twitter', url: this.data.social.twitter }
+        const socialLinks = [{
+                icon: 'fa-instagram',
+                url: this.data.social.instagram
+            },
+            {
+                icon: 'fa-medium',
+                url: this.data.social.medium
+            },
+            {
+                icon: 'fa-github',
+                url: this.data.social.github
+            },
+            {
+                icon: 'fa-twitter',
+                url: this.data.social.twitter
+            }
         ];
 
         socialLinks.forEach(social => {
@@ -519,10 +543,25 @@ class ContactSection extends Section {
         const form = document.createElement('form');
         form.id = 'contactForm';
 
-        const formFields = [
-            { type: 'text', id: 'name', label: 'Name', placeholder: 'Your Name' },
-            { type: 'text', id: 'subject', label: 'Subject', placeholder: 'Subject' },
-            { type: 'textarea', id: 'message', label: 'Message', placeholder: 'Your Message', rows: 5 }
+        const formFields = [{
+                type: 'text',
+                id: 'name',
+                label: 'Name',
+                placeholder: 'Your Name'
+            },
+            {
+                type: 'text',
+                id: 'subject',
+                label: 'Subject',
+                placeholder: 'Subject'
+            },
+            {
+                type: 'textarea',
+                id: 'message',
+                label: 'Message',
+                placeholder: 'Your Message',
+                rows: 5
+            }
         ];
 
         formFields.forEach(field => {
@@ -573,7 +612,7 @@ class ContactSection extends Section {
         const hr = document.createElement('hr');
         const footer = document.createElement('footer');
         footer.className = 'text-center py-3 fw-bold';
-        
+
         const currentYear = new Date().getFullYear();
         footer.innerHTML = `
             <p>&copy;${currentYear} Dev<span class="text-warning">Folio</span></p>
@@ -592,13 +631,13 @@ class ContactSection extends Section {
             if (form) {
                 form.addEventListener('submit', (e) => {
                     e.preventDefault();
-    
+
                     const name = form.elements['name'].value;
                     const subject = form.elements['subject'].value;
                     const message = form.elements['message'].value;
-    
+
                     const mailtoLink = `mailto:${this.data.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(`From: ${name}\n\n${message}`)}`;
-    
+
                     window.location.href = mailtoLink; // mailto'yu aç
                     form.reset();
                 });
@@ -607,5 +646,5 @@ class ContactSection extends Section {
             }
         }, 100); // 100ms ge
     }
-    
-} 
+
+}

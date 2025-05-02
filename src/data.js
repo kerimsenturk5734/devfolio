@@ -14,8 +14,7 @@ const portfolioData = {
     education: {
         id: "education",
         title: "Education",
-        items: [
-            {
+        items: [{
                 degree: "Bachelor's in Computer Engineering",
                 institution: "Kastamonu University (Turkiye)",
                 period: "2020-Present"
@@ -30,62 +29,60 @@ const portfolioData = {
     experience: {
         id: "experience",
         title: "Experience",
-        items: [
-            {
+        items: [{
                 position: "Java Backend Developer",
                 company: "Ozgur Yazilim A.S.",
                 period: "April 2024-July 2024",
-                technologies: ["Java", "Spring Boot", "Maven", "React.js"]
+                technologies: ["java", "spring_boot", "maven", "react"]
             },
             {
                 position: "Backend Web Developer",
                 company: "INDATA Endüstriyel Veri Teknolojileri A.Ş.",
                 period: "February 2025-Present",
-                technologies: ["C#", "ASP.NET Core"]
+                technologies: ["csharp", "aspnet_core"]
             }
         ]
     },
     projects: {
         id: "projects",
         title: "My Projects",
-        items: [
-            {
+        items: [{
                 title: "Image Proccessing Tool",
                 image: "https://github.com/kerimsenturk5734/Image-Processing-Tool/raw/master/logo.png",
                 description: "This repository contains an Image Process Tool written in Java without using external image processing library like OpenCV.",
-                technologies: ["Java", "Swing", "Maven"],
+                technologies: ["java", "swing", "maven"],
                 githubUrl: "https://github.com/kerimsenturk5734/Image-Processing-Tool"
             },
             {
                 title: "Lab Report",
                 description: "This repository includes a web-based disease and report management application for patients, doctors and laboratory staff",
-                technologies: ["Java", "Spring Boot", "Maven", "React.js", "Docker", "Typescript", "MySQL", "iText"],
+                technologies: ["java", "spring_boot", "maven", "react", "docker", "typescript", "mysql", "itext"],
                 githubUrl: "https://github.com/kerimsenturk5734/lab-report"
             },
             {
                 title: "Visual Data Structure",
                 description: "This repository contains a web-based app to visualize and teach data structures and algorithms.",
-                technologies: ["Java", "Spring Boot", "Maven", "React.js", "Docker", "JavaScript", "MySQL", "D3.js"],
+                technologies: ["java", "spring_boot", "maven", "react", "docker", "javascript", "mysql", "d3js"],
                 githubUrl: "https://github.com/kerimsenturk5734/visual-data-structure"
             },
             {
                 title: "Library Management System",
                 image: "https://raw.githubusercontent.com/kerimsenturk5734/Library-Management/main/bin/Debug/books-128.ico",
                 description: "This repository contains a library information management system for public or private library services.",
-                technologies: ["C#", "Windows Forms", "MsSQL"],
+                technologies: ["csharp", "windows_forms", "mssql"],
                 githubUrl: "https://github.com/kerimsenturk5734/Library-Management"
             },
             {
                 title: "Bookorrow",
                 image: "https://raw.githubusercontent.com/kerimsenturk5734/Bookorrow/master/logo.png",
                 description: "This repository contains a trading mobile application where we can only buy books in exchange for books.",
-                technologies: ["Java", "Android", "Firebase"],
+                technologies: ["java", "android", "firebase"],
                 githubUrl: "https://github.com/kerimsenturk5734/Bookorrow"
             },
             {
                 title: "DevFolio",
                 description: "A simple, clean portfolio site template for software developers to showcase their personal information, career information, blog content and projects.",
-                technologies: ["HTML", "CSS", "JavaScript", "Bootstrap"],
+                technologies: ["html", "css", "javascript", "bootstrap"],
                 githubUrl: "https://github.com/kerimsenturk5734/dev-folio"
             }
         ]
@@ -107,4 +104,4 @@ const portfolioData = {
             twitter: "https://x.com/KerSenturk57"
         }
     }
-}; 
+};
