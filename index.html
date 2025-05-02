@@ -22,48 +22,80 @@
 <body>
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
-        <div class="container">
+        <div class="container d-flex justify-content-between align-items-center">
+
+            <!-- Left: Brand -->
             <a class="navbar-brand fw-bold" href="#">Dev<span class="text-warning">Folio</span></a>
+
+            <!-- Toggler -->
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto fw-bold fs-5">
+
+            <!-- Center + Right Content Collapsible -->
+            <div class="collapse navbar-collapse justify-content-between" id="navbarNav">
+
+                <!-- Center: Nav Items -->
+                <ul class="navbar-nav mx-auto gap-2 fw-bold fs-5 text-center">
                     <li class="nav-item">
-                        <a class="nav-link" href="#hero">Home</a>
+                        <a class="nav-link" href="#hero">
+                            <i class="fa-solid fa-house"></i> Home
+                        </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#about">About</a>
+                        <a class="nav-link" href="#about">
+                            <i class="fa-solid fa-address-card"></i> About
+                        </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#edu_exp">Edu-Exp</a>
+                        <a class="nav-link" href="#edu_exp">
+                            <i class="fa-solid fa-school"></i> Edu-Exp
+                        </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#projects">Projects</a>
+                        <a class="nav-link" href="#projects">
+                            <i class="fa-solid fa-folder-open"></i> Projects
+                        </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#blogs">Blogs</a>
+                        <a class="nav-link" href="#blogs">
+                            <i class="fa-solid fa-rss"></i> Blogs
+                        </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#contact">Contact</a>
+                        <a class="nav-link" href="#contact">
+                            <i class="fa-solid fa-address-book"></i> Contact
+                        </a>
                     </li>
                 </ul>
+
+                <!-- Right: Extras -->
+                <ul class="navbar-nav fw-bold fs-5 text-center gap-2 mt-2 mt-lg-0 d-flex flex-row align-items-center justify-content-center">
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://github.com/kerimsenturk5734/devfolio" target="_blank"
+                            data-bs-toggle="tooltip" data-bs-placement="bottom" title="View Source Code on GitHub">
+                            <i class="fab fa-github fa-xl"></i>
+                        </a>
+                    </li>
+                </ul>
+
             </div>
         </div>
     </nav>
 
+
     <!-- App Container -->
     <div id="app">
         <!-- Welcome Section -->
-    <section id="welcome" class="d-flex align-items-center py-3">
-        <div class="container d-flex justify-content-center align-items-center py-5">
-            <!-- Welcome Text -->
-            <div class="col-md-3 text-center">
-                <h1>Welcome to My <span class="display-2">Dev<span class="text-warning">Folio</span></span></h1>
+        <section id="welcome" class="d-flex align-items-center py-3">
+            <div class="container d-flex justify-content-center align-items-center py-5">
+                <!-- Welcome Text -->
+                <div class="col-md-3 text-center">
+                    <h1>Welcome to My <span class="display-2">Dev<span class="text-warning">Folio</span></span></h1>
+                </div>
             </div>
-        </div>
-    </section>
+        </section>
     </div>
 
     <!-- Scripts -->
