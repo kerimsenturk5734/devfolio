@@ -8,6 +8,14 @@ body {
     background-color: rgb(43, 39, 39);
 }
 
+.nav-item{
+    border-bottom: 1px solid  rgb(159,158,158);
+    border-top: 1px solid  rgb(159,158,158);
+    border-radius: 1rem;
+    padding-inline: 4px;
+    padding-block: 2px;
+}
+
 #welcome, #hero {
     font-size: x-large;
 }
